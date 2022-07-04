@@ -17,10 +17,16 @@ data "aws_ami" "ubuntu3" {
 resource "aws_instance" "jenkins" {
   ami           = data.aws_ami.ubuntu3.id
   instance_type = "t2.micro"
-  key_name      = "assignment-c7key"
+  key_name      = "upgrad_dev"
   vpc_security_group_ids = [aws_security_group.ingress-all.id]
   subnet_id = module.vpc.private_subnets[0]
  tags = {
     Name = "JenkinsEC2"
+    Managed = "Ansible"
   }
+}
+
+resource "aws_eip" "lb1" {
+  instance = aws_instance.web.id
+  vpc      = true
 }

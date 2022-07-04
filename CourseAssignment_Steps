@@ -1,0 +1,34 @@
+Task2
+	Subtask1 :
+		0. Install aws cli
+		1. Install ansible on bastion machine
+			> sudo apt update
+			> sudo apt install ansible
+			> create ansible.cfg file at location /etc/ansible/ansible.cfg
+				[defaults]
+				inventory = /Users/dipeshgarg/learning/demo/4-dynamic-inventory
+				host_key_checking = False
+				ansible_ssh_user = ubuntu
+				remote_user = ubuntu
+				private_key_file=/Users/dipeshgarg/files/upgrad-dev.pem
+			> vim upgrad_dev.pem file and paste content
+			> sudo apt-get update
+			> sudo apt-get -y install python3-boto3
+		2. Write Inventory file and add details [ip + pem file] for jenkins + app
+		3. Write playbook file to install docker on jenkins + app
+		https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04
+		
+	Subtask2 : 
+		Demo Purpose installing 
+			1. docker on public bastion machine
+			2. install jenkins on docker
+				docker container run -itd -p 8080:8080 --env JENKINS_OPTS="--prefix=/jenkins" -v jenkins:/var/jenkins_home --name jenkins-local jenkins/jenkins:lts
+			3. create ALB with dummy target group with port 80
+			4. Create target group for jenkins with port 8080
+			5. In listeners insert rule for jenkins and forward all requests to jenkins target group
+			6. Fetch the load balancer dns name and apply dns-name/jenkins and you will see the jenkins page
+	Subtask3:
+		1. Install jenkins manually on jenkins ec2 machine
+			docker container run -itd -p 8080:8080 --env JENKINS_OPTS="--prefix=/jenkins" -v jenkins:/var/jenkins_home --name jenkins-local jenkins/jenkins:lts
+		2. 
+	

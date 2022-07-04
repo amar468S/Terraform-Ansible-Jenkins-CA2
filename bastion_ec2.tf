@@ -17,7 +17,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name      = "assignment-c7key"
+  key_name      = "upgrad_dev"
   vpc_security_group_ids = [aws_security_group.ingress-all-test.id]
   subnet_id = module.vpc.public_subnets[0]
  tags = {

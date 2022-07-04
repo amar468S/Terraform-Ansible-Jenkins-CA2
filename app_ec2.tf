@@ -17,10 +17,16 @@ data "aws_ami" "ubuntu1" {
 resource "aws_instance" "app" {
   ami           = data.aws_ami.ubuntu1.id
   instance_type = "t2.micro"
-  key_name      = "assignment-c7key"
+  key_name      = "upgrad_dev"
   vpc_security_group_ids = [aws_security_group.ingress-all-sg.id]
   subnet_id = module.vpc.private_subnets[1]
  tags = {
     Name = "AppServer"
+    Managed = "Ansible"
   }
+}
+
+resource "aws_eip" "lb2" {
+  instance = aws_instance.web.id
+  vpc      = true
 }
